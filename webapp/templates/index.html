@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroScan - Brain Tumor MRI Classifier</title>
+<meta name="description" content="Upload a brain MRI and get an instant four-class prediction (glioma, meningioma, pituitary macroadenoma, healthy) from a fine-tuned VGG16 network.">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#top"><span class="dot"></span>NeuroScan</a>
+  <nav>
+    <a href="#how">How it works</a>
+    <a href="#analytics">Analytics</a>
+    <a href="#classes">Classes</a>
+    <a href="#model">Model</a>
+    <a href="#demo" class="btn btn-small">Try it</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Deep learning for medical imaging</p>
+      <h1>Brain tumor detection from MRI, in seconds.</h1>
+      <p class="lead">A fine-tuned VGG16 network classifies a brain MRI into glioma, meningioma, pituitary macroadenoma or healthy tissue, and shows how confident it is in every class.</p>
+      <div class="cta">
+        <a href="#demo" class="btn">Upload an MRI</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+      <ul class="stats">
+        <li><strong>4</strong><span>classes</span></li>
+        <li><strong>1,137</strong><span>MRI images</span></li>
+        <li><strong>VGG16</strong><span>transfer learning</span></li>
+      </ul>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="scan">
+        <div class="scan-ring r1"></div>
+        <div class="scan-ring r2"></div>
+        <div class="scan-ring r3"></div>
+        <div class="scan-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section">
+    <h2>How it works</h2>
+    <div class="steps">
+      <article class="card"><span class="num">1</span><h3>Upload</h3><p>Choose a brain MRI slice (JPG or PNG). It is sent only to the server running on your own machine.</p></article>
+      <article class="card"><span class="num">2</span><h3>Preprocess</h3><p>The image is resized to 128 x 128, converted to RGB and scaled to the 0-1 range, exactly as in training.</p></article>
+      <article class="card"><span class="num">3</span><h3>Classify</h3><p>VGG16 features feed a small dense head with softmax output across the four classes.</p></article>
+      <article class="card"><span class="num">4</span><h3>Read the result</h3><p>You get the predicted class plus a probability for every class, so low-confidence cases are easy to spot.</p></article>
+    </div>
+  </section>
+
+  <section id="demo" class="section demo">
+    <h2>Try the classifier</h2>
+    <p class="muted">Drop an MRI image below. For research and education only, not a medical device.</p>
+    <div class="demo-grid">
+      <div>
+        <label id="drop" class="drop" for="file" tabindex="0">
+          <input id="file" type="file" accept="image/*" hidden>
+          <img id="preview" alt="Uploaded MRI preview" hidden>
+          <div id="drop-hint">
+            <strong>Click to choose</strong> or drag an MRI here
+            <small>JPG, PNG, up to 8 MB</small>
+          </div>
+        </label>
+        <button id="run" class="btn" disabled>Analyze image</button>
+      </div>
+      <div id="result" class="result" aria-live="polite">
+        <p class="muted placeholder">Results will appear here.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="analytics" class="section">
+    <h2>Model analytics</h2>
+    <p class="muted">Measured on the 229 held-out test images the model never saw during training.</p>
+    <div id="kpis" class="kpis"></div>
+    <div class="two-col">
+      <div class="card">
+        <h3>Per-class performance</h3>
+        <div id="perclass"></div>
+      </div>
+      <div class="card">
+        <h3>Confusion matrix</h3>
+        <p class="muted small">Rows are the true class, columns the predicted class.</p>
+        <div id="matrix" class="matrix"></div>
+      </div>
+    </div>
+    <p id="analytics-error" class="error" hidden>Analytics are unavailable right now.</p>
+  </section>
+
+  <section id="classes" class="section">
+    <h2>What it recognizes</h2>
+    <div class="classes">
+      <article class="card"><h3>Glioma</h3><p>Tumors that arise from glial cells in the brain or spinal cord. Often infiltrative with irregular borders.</p></article>
+      <article class="card"><h3>Meningioma</h3><p>Usually slow-growing tumors of the meninges, the membranes around the brain. Typically well-defined and attached to the dura.</p></article>
+      <article class="card"><h3>Pituitary Macroadenoma</h3><p>Tumors of the pituitary gland larger than 10 mm, located at the base of the brain near the sella turcica.</p></article>
+      <article class="card"><h3>Healthy</h3><p>MRI slices with no visible tumor, used so the model also learns what normal anatomy looks like.</p></article>
+    </div>
+  </section>
+
+  <section id="model" class="section">
+    <h2>Model and data</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>Architecture</h3>
+        <ul class="facts">
+          <li>VGG16 base pretrained on ImageNet, input 128 x 128 x 3</li>
+          <li>Last three base layers unfrozen for fine-tuning</li>
+          <li>Flatten, Dropout 0.3, Dense 128 (ReLU), Dropout 0.2</li>
+          <li>Softmax output over 4 classes</li>
+          <li>Adam, learning rate 1e-4, early stopping on validation loss</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Dataset</h3>
+        <ul class="facts">
+          <li>Multi-Class Brain Tumor MRI Dataset, Mendeley Data (CC BY 4.0)</li>
+          <li>1,137 images: 908 training, 229 testing, stratified 80/20</li>
+          <li>15% of training held out for validation</li>
+          <li>Augmentation: brightness, contrast, horizontal flip, rotation up to 15 degrees</li>
+          <li>Evaluated with classification report, confusion matrix and per-class ROC/AUC</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section disclaimer">
+    <h2>Important</h2>
+    <p>NeuroScan is a student research project. It is not a medical device and must not be used to diagnose, treat or rule out any condition. Any MRI finding needs review by a qualified radiologist or physician.</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>NeuroScan, built with TensorFlow, Keras and Flask. Dataset: Jamil and Khan (2025), Mendeley Data, doi:10.17632/82mtzd8x72.2.</p>
+</footer>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
