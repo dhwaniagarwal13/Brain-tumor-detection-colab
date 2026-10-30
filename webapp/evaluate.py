@@ -78,6 +78,12 @@ metrics = {
     "confusion": confusion.tolist(),
 }
 
+if os.path.exists(OUT_PATH):
+    with open(OUT_PATH) as f:
+        previous = json.load(f)
+    if "history" in previous:
+        metrics["history"] = previous["history"]
+
 with open(OUT_PATH, "w") as f:
     json.dump(metrics, f, indent=2)
 print(json.dumps(metrics, indent=2))

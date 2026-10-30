@@ -142,6 +142,15 @@ p { margin: 0 0 1rem; }
 .m-cell { display: grid; place-items: center; min-height: 54px; border-radius: 8px; font-weight: 700; font-size: .95rem; background: color-mix(in srgb, var(--accent) calc(var(--v) * 100%), var(--line)); color: var(--text); }
 .m-cell.strong { color: #fff; }
 .m-head { display: grid; place-items: center; text-align: center; font-size: .7rem; color: var(--muted); line-height: 1.2; padding: 2px; }
+#history, #history-note { margin-top: 1.2rem; }
+.chart svg { width: 100%; height: auto; display: block; }
+.chart .grid { stroke: var(--line); stroke-width: 1; }
+.chart .tick { fill: var(--muted); font-size: 11px; }
+.chart .line-train { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.chart .line-val { fill: none; stroke: var(--accent-2); stroke-width: 2.5; }
+.chart .best { stroke: var(--warn); stroke-dasharray: 4 4; stroke-width: 1.5; }
+.legend { display: flex; gap: 1.2rem; font-size: .8rem; color: var(--muted); margin-top: .4rem; }
+.legend i { display: inline-block; width: 12px; height: 3px; border-radius: 2px; margin-right: .4rem; vertical-align: middle; }
 .disclaimer { border-top: 1px solid var(--line); }
 .disclaimer p { color: var(--muted); max-width: 70ch; }
 .footer { text-align: center; padding: 2rem 5vw 3rem; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); }
