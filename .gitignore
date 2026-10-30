@@ -1,0 +1,5 @@
+webapp/.venv/
+webapp/server.log
+webapp/server.err
+__pycache__/
+*.h5
