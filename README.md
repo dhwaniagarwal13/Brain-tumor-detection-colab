@@ -2,6 +2,8 @@
 
 Classifies brain MRI slices into **Glioma, Healthy, Meningioma, Pituitary Macroadenoma** using a fine-tuned MobileNetV2, with a Colab notebook, a local prediction app and an educational website.
 
+By **Dhwani Agarwal (RA2311027010021)** and **Akshay Jha (RA2311027010059)**.
+
 > Educational project. Not a medical device and not for diagnosis.
 
 ## Results (229 held-out test images)

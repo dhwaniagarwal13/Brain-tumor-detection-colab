@@ -10,7 +10,7 @@ const HEAD = "Cambria", BODY = "Calibri";
 const pres = new pptxgen();
 pres.layout = "LAYOUT_16x9"; // 10 x 5.625
 pres.title = "NeuroScan: Brain Tumor MRI Classification";
-pres.author = "Dhwani Agarwal";
+pres.author = "Dhwani Agarwal and Akshay Jha";
 
 const classes = ["Glioma", "Healthy", "Meningioma", "Pituitary"];
 const pct = (x) => (x * 100).toFixed(1) + "%";
@@ -44,7 +44,7 @@ function card(s, x, y, w, h, name) {
   s.addText("NeuroScan", { x: 0.6, y: 1.4, w: 5.2, h: 0.9, fontFace: HEAD, fontSize: 54, bold: true, color: WHITE, margin: 0, isTextBox: true });
   s.addText("Brain tumor MRI classification with transfer learning", { x: 0.6, y: 2.4, w: 5, h: 0.9, fontFace: BODY, fontSize: 22, color: TEAL, margin: 0, isTextBox: true });
   s.addText("Glioma  |  Meningioma  |  Pituitary Macroadenoma  |  Healthy", { x: 0.6, y: 3.5, w: 5.2, h: 0.4, fontFace: BODY, fontSize: 14, color: "B9C9D6", margin: 0, isTextBox: true });
-  s.addText("Dhwani Agarwal", { x: 0.6, y: 4.6, w: 5, h: 0.4, fontFace: BODY, fontSize: 16, color: WHITE, margin: 0, isTextBox: true });
+  s.addText([{ text: "Dhwani Agarwal (RA2311027010021)", options: { breakLine: true } }, { text: "Akshay Jha (RA2311027010059)" }], { x: 0.6, y: 4.3, w: 5.2, h: 0.65, fontFace: BODY, fontSize: 15, color: WHITE, margin: 0, isTextBox: true });
   s.addText("Educational project, not a medical device", { x: 0.6, y: 5.0, w: 5, h: 0.3, fontFace: BODY, fontSize: 11, color: "8FA6B8", margin: 0, isTextBox: true });
 }
 
