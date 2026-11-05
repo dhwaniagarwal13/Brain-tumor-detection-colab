@@ -1,0 +1,8 @@
+# Core (training, evaluation, local web app)
+tensorflow>=2.16
+numpy
+pillow
+scikit-learn
+matplotlib
+seaborn
+flask

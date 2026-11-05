@@ -11,7 +11,7 @@ from PIL import Image, UnidentifiedImageError
 import tensorflow as tf
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "..", "Training", "models", "best.keras")
+MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "best.keras")
 IMAGE_SIZE = 224
 # Same order as sorted(os.listdir(train_dir)) in the notebook
 CLASS_NAMES = ["Glioma", "Healthy", "Meningioma", "Pituitary Macroadenoma"]

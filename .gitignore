@@ -1,9 +1,23 @@
-webapp/.venv/
-webapp/server.log
-webapp/server.err
+# Python / environments
 __pycache__/
+*.pyc
+.venv/
+webapp/.venv/
+
+# Local logs and temp
+*.log
+*.err
+
+# Large or regenerable model files
 *.h5
-Training/.venv-tfjs/
-Training/models/phase1.keras
-Training/train.err
-Training/train.log
+models/phase1.keras
+
+# Raw dataset downloads (the prepared data/Training and data/Testing ARE tracked)
+data/raw_mat/
+data/mendeley_raw/
+
+# Node
+node_modules/
+
+# Vercel local link
+.vercel
