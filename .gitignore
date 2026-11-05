@@ -21,3 +21,6 @@ node_modules/
 
 # Vercel local link
 .vercel
+
+# Office lock files
+~$*
