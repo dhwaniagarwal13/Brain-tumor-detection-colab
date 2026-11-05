@@ -1,0 +1,60 @@
+<div class="wrap">
+  <div class="page-head">
+    <h1>Questions and glossary</h1>
+    <p class="lede">Plain answers about brain tumors, scans and what this project can and cannot do.</p>
+  </div>
+
+  <div class="band-tight">
+    <h2>About the project</h2>
+    <div class="faq">
+      <details><summary>Can this tell me if I have a brain tumor?</summary><div><p>No. NeuroScan is a student research project and is not a medical device. It looks at one slice and picks one of four labels. Only a doctor reviewing your complete scan, symptoms and history can say whether you have a tumor.</p></div></details>
+      <details><summary>How accurate is it?</summary><div><p>On 229 images held out from training, the model in the live demo is right 80.4% of the time. A newer model reaches 86.9% but is not connected to the demo yet. It is least reliable on meningioma. See the <a href="results.html">results page</a>.</p></div></details>
+      <details><summary>Why did validation show 100% but the test only 86.9%?</summary><div><p>Neighbouring slices from the same scan look almost identical. When they fall on both sides of a random split, the model is scored on near-copies of its own training data. Test images are scored more fairly. More on the <a href="results.html">results page</a>.</p></div></details>
+      <details><summary>Is my image uploaded somewhere?</summary><div><p>This website never receives your image. The live predictor runs on a server you start on your own computer, so the file stays on your machine. Even so, do not upload scans you are not allowed to share.</p></div></details>
+      <details><summary>Why does the demo not work on this website?</summary><div><p>The model needs TensorFlow, which is too heavy for simple static hosting. Start <code>webapp/run.bat</code> from the project folder to run it locally. Converting the model to run inside the browser is a possible future step.</p></div></details>
+      <details><summary>Are the brain images on the site real patient scans?</summary><div><p>No. The animated slices are generated in your browser as an illustration and are labelled as synthetic. The training data are public research images under a CC BY 4.0 licence.</p></div></details>
+    </div>
+
+    <h2 style="margin-top:3rem">About tumors and scans</h2>
+    <div class="faq">
+      <details><summary>Is a brain tumor the same as brain cancer?</summary><div><p>Not always. A tumor is an abnormal growth, and it can be benign or malignant. Even benign tumors can cause serious problems because the skull has no room for them to expand. Doctors use the word cancer for malignant growths.</p></div></details>
+      <details><summary>Which type is most common?</summary><div><p>Meningioma is the most common primary brain tumor in adults, and glioblastoma is the most common malignant one. Tumors that spread to the brain from cancers elsewhere are more common than either, though they are not part of this project.</p></div></details>
+      <details><summary>Why do some people get an MRI with contrast?</summary><div><p>A contrast agent injected into a vein brightens areas where the blood-brain barrier is leaky, which is typical of many tumors. It helps doctors outline a tumor and tell it from swelling. It is not needed for every scan.</p></div></details>
+      <details><summary>Is MRI safe?</summary><div><p>MRI uses magnets and radio waves, not X-rays. It is considered very safe for most people. The risks are mainly from metal in or on the body and some implanted devices, which is why you are screened before a scan. Tell staff about any implants or pregnancy.</p></div></details>
+      <details><summary>Does a normal MRI slice mean no tumor?</summary><div><p>No. A tumor could be on a slice above or below the one shown. Clinicians review the entire scan, and often several sequences, before saying a brain is normal.</p></div></details>
+      <details><summary>Can a scan alone tell the exact tumor type?</summary><div><p>Often a scan gives a strong hint, but the final answer usually needs tissue examined under a microscope and tested genetically.</p></div></details>
+    </div>
+
+    <h2 style="margin-top:3rem">About the AI</h2>
+    <div class="faq">
+      <details><summary>Why do the slices matter?</summary><div><p>The model sees one flat slice, while a tumor is three-dimensional and can look different on every slice. Radiologists scroll through the full stack, so the model has less information than a human reader.</p></div></details>
+      <details><summary>What does the confidence percentage mean?</summary><div><p>It shows how strongly the model favours one label over the others. It is not the chance the answer is correct. Models can be confidently wrong.</p></div></details>
+      <details><summary>Could AI replace radiologists?</summary><div><p>Current evidence points to AI as an assistant, for example flagging urgent scans or measuring tumors, with a radiologist responsible for the reading. Projects like this one are good for learning, not for replacing clinical judgement.</p></div></details>
+      <details><summary>What would make the model better?</summary><div><p>More and more varied data, patient-level splits for honest validation, whole 3D volumes with several sequences, and testing on scans from other hospitals. <a href="results.html">Our plan is on the results page</a>.</p></div></details>
+    </div>
+  </div>
+
+  <div class="band">
+    <h2>Glossary</h2>
+    <dl class="gloss">
+      <div><dt>Axial</dt><dd>A slice taken horizontally, as if looking down from the top of the head.</dd></div>
+      <div><dt>Benign</dt><dd>Not cancerous. Grows locally and does not invade like cancer, but can still cause harm by pressure.</dd></div>
+      <div><dt>Contrast agent</dt><dd>A substance, usually gadolinium-based for MRI, injected to make certain tissues show up more clearly.</dd></div>
+      <div><dt>Confusion matrix</dt><dd>A table of true classes against predicted classes that shows exactly which mistakes a model makes.</dd></div>
+      <div><dt>CNN</dt><dd>Convolutional neural network, a model type built to find patterns in images.</dd></div>
+      <div><dt>Edema</dt><dd>Swelling caused by excess fluid, often around a tumor.</dd></div>
+      <div><dt>Extra-axial</dt><dd>Outside the brain tissue itself, for example growing from the meninges.</dd></div>
+      <div><dt>FLAIR</dt><dd>An MRI sequence that suppresses normal fluid signal so lesions stand out.</dd></div>
+      <div><dt>Glial cells</dt><dd>The supporting cells of the nervous system. Gliomas arise from them.</dd></div>
+      <div><dt>Grade</dt><dd>A score from 1 to 4 for how aggressive a tumor is.</dd></div>
+      <div><dt>Intra-axial</dt><dd>Inside the brain tissue itself.</dd></div>
+      <div><dt>Malignant</dt><dd>Cancerous: invading nearby tissue and able to spread.</dd></div>
+      <div><dt>Meninges</dt><dd>The three membranes covering the brain and spinal cord.</dd></div>
+      <div><dt>Precision and recall</dt><dd>Precision is how many predicted positives were right. Recall is how many true positives were found.</dd></div>
+      <div><dt>Sella turcica</dt><dd>The small bony hollow at the skull base that holds the pituitary gland.</dd></div>
+      <div><dt>Softmax</dt><dd>A function that converts a model's raw scores into probabilities that add up to 100%.</dd></div>
+      <div><dt>T1 and T2</dt><dd>Two basic MRI sequences. T1 shows anatomy, and T2 is sensitive to water.</dd></div>
+      <div><dt>Transfer learning</dt><dd>Starting from a model trained on a large dataset and adapting it to a new task.</dd></div>
+    </dl>
+  </div>
+</div>

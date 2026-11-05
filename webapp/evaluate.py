@@ -11,9 +11,9 @@ from PIL import Image
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.join(BASE_DIR, "..")
 TEST_DIR = os.path.join(PROJECT_DIR, "Testing")
-MODEL_PATH = os.path.join(PROJECT_DIR, "Brain_Tumor_Prediction.h5")
+MODEL_PATH = os.path.join(PROJECT_DIR, "Training", "models", "best.keras")
 OUT_PATH = os.path.join(BASE_DIR, "static", "metrics.json")
-IMAGE_SIZE = 128
+IMAGE_SIZE = 224
 
 classes = sorted(os.listdir(TEST_DIR))
 model = tf.keras.models.load_model(MODEL_PATH, compile=False)
@@ -23,7 +23,7 @@ for idx, name in enumerate(classes):
     folder = os.path.join(TEST_DIR, name)
     for fname in sorted(os.listdir(folder)):
         img = Image.open(os.path.join(folder, fname)).convert("RGB").resize((IMAGE_SIZE, IMAGE_SIZE))
-        images.append(np.asarray(img, dtype="float32") / 255.0)
+        images.append(np.asarray(img, dtype="float32"))
         labels.append(idx)
 
 y_true = np.array(labels)

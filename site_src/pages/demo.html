@@ -1,0 +1,40 @@
+<div class="wrap">
+  <div class="page-head">
+    <h1>Try the classifier</h1>
+    <p class="lede">Drop a brain MRI slice and see the model's probability for each of the four categories.</p>
+  </div>
+
+  <div class="band-tight">
+    <div class="callout warn">
+      <h3>This hosted page cannot run the model</h3>
+      <p>The classifier is a TensorFlow model that runs on a local server. To get live predictions, start <code>webapp/run.bat</code> from the project folder and open the address it prints. Your image then goes only to your own computer.</p>
+    </div>
+
+    <div class="demo-grid">
+      <div>
+        <label id="drop" class="drop" for="file" tabindex="0">
+          <input id="file" type="file" accept="image/*" hidden>
+          <img id="preview" alt="Preview of the image you chose" hidden>
+          <div id="drop-hint">
+            <strong>Click to choose an MRI</strong> or drag one here
+            <small>JPG or PNG, up to 8 MB</small>
+          </div>
+        </label>
+        <button id="run" class="btn btn-dark" disabled>Analyze image</button>
+      </div>
+      <div id="result" class="result" aria-live="polite">
+        <p class="placeholder">The prediction will appear here.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top:3.5rem">Before you read a result</h2>
+    <div class="prose">
+      <ul>
+        <li><strong>Use a single axial brain slice.</strong> The model was trained on 2D slices of this kind. Whole scans, other body parts or photos of screens give meaningless output.</li>
+        <li><strong>Confidence is not correctness.</strong> A model can be 95% sure and wrong. See <a href="technology.html">how confidence is computed</a>.</li>
+        <li><strong>Expect mistakes.</strong> Meningioma is the hardest class, and the model was only tested on one dataset. See the <a href="results.html">results</a>.</li>
+        <li><strong>It is not a diagnosis.</strong> Only a clinician with the full scan and your history can say what a finding means.</li>
+      </ul>
+    </div>
+  </div>
+</div>

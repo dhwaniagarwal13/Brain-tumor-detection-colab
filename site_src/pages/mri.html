@@ -1,0 +1,86 @@
+<div class="wrap">
+  <div class="page-head">
+    <h1>How to read a brain MRI</h1>
+    <p class="lede">The same brain looks completely different depending on the MRI sequence. Switch between them below on a synthetic slice.</p>
+  </div>
+
+  <div class="band-tight">
+    <div class="split">
+      <div class="viewer">
+        <div class="viewer-screen">
+          <canvas id="slice" data-mode="t1" aria-label="Synthetic brain MRI slice you can view in T1, T2 or FLAIR"></canvas>
+          <div class="ov tl">SYNTHETIC<br>AXIAL<br><span id="ov-seq">T1-weighted</span></div>
+          <div class="ov tr"><span id="ov-slice">Slice 15 / 28</span></div>
+          <div class="ov bl">Illustration, not a patient scan</div>
+        </div>
+        <div class="viewer-ctl">
+          <div class="seq-switch" role="group" aria-label="MRI sequence">
+            <button type="button" data-seq="t1" aria-pressed="true">T1</button>
+            <button type="button" data-seq="t2" aria-pressed="false">T2</button>
+            <button type="button" data-seq="flair" aria-pressed="false">FLAIR</button>
+          </div>
+          <label for="slice-range"><span>Slice</span></label>
+          <input id="slice-range" type="range" min="0" max="27" value="14">
+          <p class="viewer-note" id="viewer-note" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="prose">
+        <h2>What you are looking at</h2>
+        <p id="seq-desc"></p>
+        <p>Radiologists rarely rely on one sequence. They compare several, because each answers a different question: what is the anatomy, where is the water, which tissue is abnormal, and what lights up after contrast.</p>
+        <p>The lesion in this illustration is invented. Its outline in amber is what a radiologist might mark as a region of interest.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head">
+      <h2>How MRI works, briefly</h2>
+      <p class="lede">A strong magnet lines up hydrogen atoms in the body's water. Radio pulses knock them out of line, and the scanner listens as they relax back. Different tissues relax at different speeds, and that difference becomes contrast.</p>
+    </div>
+    <div class="prose">
+      <p>MRI uses no ionizing radiation, unlike CT. It is excellent for soft tissue such as the brain, which is why it is the preferred scan for brain tumors. Scans take roughly 20 to 60 minutes, are loud, and require lying still inside a tube. People with some metal implants or devices cannot be scanned safely, so staff ask detailed screening questions.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head"><h2>The sequences you will meet</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Sequence</th><th>Fluid looks</th><th>Best for</th></tr></thead>
+        <tbody>
+          <tr><td><strong>T1</strong></td><td>Dark</td><td>Clear anatomy. Gray and white matter are easy to tell apart.</td></tr>
+          <tr><td><strong>T1 with contrast</strong></td><td>Dark</td><td>Showing where the blood-brain barrier is leaky, which outlines many tumors. Uses a gadolinium-based agent injected into a vein.</td></tr>
+          <tr><td><strong>T2</strong></td><td>Bright</td><td>Water-rich abnormalities, including swelling (edema) and many tumors.</td></tr>
+          <tr><td><strong>FLAIR</strong></td><td>Dark</td><td>Finding lesions that sit next to fluid spaces, because normal fluid is suppressed.</td></tr>
+          <tr><td><strong>DWI</strong></td><td>Varies</td><td>Measuring how freely water moves. Useful for stroke and for telling some tumors from abscesses.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head"><h2>Three ways to cut a brain</h2></div>
+    <div class="prose">
+      <ul>
+        <li><strong>Axial</strong> slices run from front to back like looking down from above. They are the most common view, and the one this project uses.</li>
+        <li><strong>Coronal</strong> slices look from the front, showing left and right and the base of the brain. They are especially useful for pituitary tumors.</li>
+        <li><strong>Sagittal</strong> slices look from the side and show the midline structures in profile.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head"><h2>What radiologists look for</h2></div>
+    <div class="prose">
+      <ul>
+        <li><strong>Location.</strong> Inside the brain, on its surface or at the skull base narrows the possibilities.</li>
+        <li><strong>Borders.</strong> Sharp edges suggest a tumor that pushes tissue aside, and blurry edges suggest one that infiltrates it.</li>
+        <li><strong>Enhancement.</strong> Whether, how much and in what pattern the lesion brightens after contrast.</li>
+        <li><strong>Mass effect.</strong> Squashed ventricles, shifted midline or swelling that shows the lesion is pushing on the rest of the brain.</li>
+        <li><strong>Change over time.</strong> Comparing with earlier scans is often the most telling clue.</li>
+      </ul>
+      <div class="callout warn"><p>Notice how much of this depends on seeing the whole volume and comparing sequences. A model that sees one slice of one sequence is working with far less than a radiologist, which is a main reason its accuracy has a ceiling. <a href="technology.html">More on the model</a>.</p></div>
+    </div>
+  </div>
+</div>

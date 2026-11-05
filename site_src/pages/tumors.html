@@ -1,0 +1,131 @@
+<div class="wrap">
+  <div class="page-head">
+    <h1>Brain tumor types: a plain-language guide</h1>
+    <p class="lede">What the three tumor categories in this project are, how they show up on MRI, and how doctors approach them. General education only, not medical advice.</p>
+  </div>
+
+  <div class="article">
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <a href="#basics">Basics</a>
+      <a href="#glioma">Glioma</a>
+      <a href="#meningioma">Meningioma</a>
+      <a href="#pituitary">Pituitary macroadenoma</a>
+      <a href="#healthy">Healthy brain</a>
+      <a href="#symptoms">Symptoms</a>
+      <a href="#diagnosis">Diagnosis</a>
+      <a href="#treatment">Treatment</a>
+      <a href="#limits">What AI cannot tell</a>
+    </nav>
+
+    <div>
+      <section id="basics">
+        <h2>The basics</h2>
+        <div class="prose">
+          <p>A brain tumor is an abnormal growth of cells inside the skull. Doctors sort tumors in a few overlapping ways, and it helps to know the words before reading about specific types.</p>
+          <ul>
+            <li><strong>Primary or secondary.</strong> Primary tumors start in the brain or its coverings. Secondary tumors (metastases) spread to the brain from cancer elsewhere in the body, and are more common than primary tumors.</li>
+            <li><strong>Benign or malignant.</strong> Benign tumors grow slowly and do not invade like cancer, but can still cause serious problems by pressing on the brain in a confined space. Malignant tumors invade nearby tissue and tend to grow faster.</li>
+            <li><strong>Grade.</strong> The World Health Organization grades central nervous system tumors from 1 (least aggressive) to 4 (most aggressive), based on how abnormal the cells look and behave. Newer classifications also use molecular markers, not just appearance under the microscope.</li>
+            <li><strong>Inside or outside brain tissue.</strong> Intra-axial tumors grow within the brain itself. Extra-axial tumors grow from the coverings or nearby structures and push on the brain from outside. This distinction matters a great deal on MRI.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="glioma">
+        <h2>Glioma</h2>
+        <div class="prose">
+          <p>Gliomas arise from glial cells, the supporting cells of the brain and spinal cord. The group includes astrocytomas, oligodendrogliomas and glioblastoma. Some grow slowly over years, while glioblastoma, the most common malignant primary brain tumor in adults, is aggressive.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>Starts in</dt><dd>Glial cells within brain tissue (intra-axial).</dd></div>
+          <div><dt>Grades</dt><dd>Low grade to grade 4. Modern diagnosis combines microscope findings with genetic testing, such as IDH mutation status.</dd></div>
+          <div><dt>Typical MRI look</dt><dd>Poorly defined borders because the tumor infiltrates. Bright on T2 and FLAIR. Higher-grade tumors often show irregular or ring-like contrast enhancement, dead (necrotic) centers and surrounding swelling.</dd></div>
+          <div><dt>Why it is hard</dt><dd>Tumor cells spread beyond what is visible on the scan, so surgery rarely removes everything.</dd></div>
+        </dl>
+      </section>
+
+      <section id="meningioma">
+        <h2>Meningioma</h2>
+        <div class="prose">
+          <p>Meningiomas grow from the meninges, the layers of membrane that wrap the brain and spinal cord. They are the most common primary brain tumor in adults, and are diagnosed more often in women. Most are benign and slow-growing, and some never need treatment beyond monitoring.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>Starts in</dt><dd>The arachnoid layer of the meninges (extra-axial).</dd></div>
+          <div><dt>Grades</dt><dd>Most are grade 1. A minority are grade 2 or 3 and more likely to return.</dd></div>
+          <div><dt>Typical MRI look</dt><dd>A well-defined mass attached to the dura (the tough outer membrane) that enhances strongly and evenly with contrast. A "dural tail" of thickened membrane is a classic sign. Some contain calcium.</dd></div>
+          <div><dt>Why it confuses AI</dt><dd>Seen from one angle, a meningioma can resemble a glioma or a pituitary tumor. In this project it is the hardest class to get right.</dd></div>
+        </dl>
+      </section>
+
+      <section id="pituitary">
+        <h2>Pituitary macroadenoma</h2>
+        <div class="prose">
+          <p>The pituitary gland sits at the base of the brain in a small bony pocket called the sella turcica, and controls many hormones. An adenoma is a usually benign tumor of the gland. A macroadenoma is one larger than 10 millimetres, and its size is what makes it a problem.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>Starts in</dt><dd>The pituitary gland, in the sella turcica at the skull base.</dd></div>
+          <div><dt>Two kinds</dt><dd>Functioning tumors make too much of a hormone (for example prolactin, growth hormone or ACTH). Non-functioning tumors make none but can cause problems by size alone.</dd></div>
+          <div><dt>Typical MRI look</dt><dd>A mass in or above the sella. Larger ones can grow upward and form a figure-eight ("snowman") shape where they squeeze through the opening in the diaphragma sellae.</dd></div>
+          <div><dt>Why size matters</dt><dd>Growing upward, it can press on the optic chiasm, where the optic nerves cross, and narrow the outer visual fields.</dd></div>
+        </dl>
+      </section>
+
+      <section id="healthy">
+        <h2>Healthy brain</h2>
+        <div class="prose">
+          <p>The "healthy" class exists so the model learns what normal looks like. On a normal axial MRI, gray and white matter are clearly distinguishable, the fluid-filled ventricles are symmetric, the midline is straight, and nothing pushes the brain out of place. A normal slice does not prove a normal brain, because a tumor may lie above or below that slice.</p>
+        </div>
+      </section>
+
+      <section id="symptoms">
+        <h2>Common symptoms</h2>
+        <div class="prose">
+          <p>Symptoms depend on where a tumor sits and how fast it grows, not on its type. Many are common in other, harmless conditions, which is why they are easy to dismiss.</p>
+          <ul>
+            <li>Headaches that are new, worsening, or worse on waking</li>
+            <li>Seizures in someone who has never had one</li>
+            <li>Weakness, numbness or trouble with balance on one side</li>
+            <li>Changes in vision, including loss of side vision</li>
+            <li>Problems with speech, memory or concentration, or changes in personality</li>
+            <li>Nausea or vomiting that is not explained by something else</li>
+          </ul>
+          <p>Pituitary tumors can also cause hormone-related symptoms, such as changes in periods, milk production, growth or energy. Anyone with persistent or worsening symptoms like these should see a doctor promptly.</p>
+        </div>
+      </section>
+
+      <section id="diagnosis">
+        <h2>How a tumor is diagnosed</h2>
+        <ol class="steps">
+          <li><h3>Neurological examination</h3><p>A doctor tests strength, reflexes, vision, balance, speech and memory to find which part of the brain may be involved.</p></li>
+          <li><h3>MRI with contrast</h3><p>MRI is the main imaging tool. A contrast agent highlights where the blood-brain barrier is disrupted, which helps outline many tumors. <a href="mri.html">More on MRI</a>.</p></li>
+          <li><h3>Specialist review</h3><p>Radiologists, neurosurgeons and oncologists look at the full set of images, usually in a team meeting, before deciding the next step.</p></li>
+          <li><h3>Tissue diagnosis</h3><p>A biopsy or surgery gives tissue for a pathologist to examine and test genetically. This, not the scan alone, usually settles the exact type and grade.</p></li>
+        </ol>
+      </section>
+
+      <section id="treatment">
+        <h2>Treatment options in brief</h2>
+        <div class="prose">
+          <p>Treatment is individual and depends on type, grade, location, size, genetics and the person's overall health. The main tools are:</p>
+          <ul>
+            <li><strong>Observation.</strong> Small, slow-growing, symptom-free tumors, such as many meningiomas, are often watched with repeat scans.</li>
+            <li><strong>Surgery.</strong> Removing as much tumor as can be done safely. Pituitary tumors are often reached through the nose (transsphenoidal surgery).</li>
+            <li><strong>Radiotherapy.</strong> Focused beams, including stereotactic radiosurgery, for tumors that cannot be fully removed or that come back.</li>
+            <li><strong>Drug treatment.</strong> Chemotherapy for some gliomas. Certain prolactin-producing pituitary tumors can shrink on medication alone.</li>
+            <li><strong>Supportive care.</strong> Medicines for seizures and swelling, plus rehabilitation, are part of care throughout.</li>
+          </ul>
+        </div>
+        <div class="callout"><p>This is an overview for understanding, not a treatment recommendation. Decisions belong with a medical team who know the full picture.</p></div>
+      </section>
+
+      <section id="limits">
+        <h2>What an AI classifier cannot tell you</h2>
+        <div class="callout warn">
+          <p>NeuroScan looks at one flat slice and picks the closest of four categories. It does not know the grade, the genetics, the size in three dimensions, or whether the lesion is actually a tumor at all. An infection, a stroke or a cyst can look similar on a single slice. Only the full scan, the clinical history and tissue diagnosis can answer those questions.</p>
+        </div>
+        <p><a href="technology.html">How the model works</a> &middot; <a href="results.html">How accurate it is</a> &middot; <a href="resources.html">Trusted places to learn more</a></p>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="wrap">
+  <div class="page-head">
+    <h1>Results: what the model really scores</h1>
+    <p class="lede">Every figure on this page was measured on 229 test images that were kept out of training entirely.</p>
+  </div>
+
+  <div class="band-tight">
+    <h2>The model behind the live demo</h2>
+    <p class="muted prose">MobileNetV2 fine-tuned at 224 pixel input (previous VGG16 baseline: 80.4% accuracy). These tiles and charts load from the measured metrics file.</p>
+    <div id="kpis" class="kpis"></div>
+    <p id="analytics-error" class="error" hidden>The metrics file could not be loaded.</p>
+    <div class="split">
+      <div class="panel"><h3>Per-class performance</h3><p class="muted small">Precision: of the images called this class, how many were right. Recall: of the true images of this class, how many were found.</p><div id="perclass"></div></div>
+      <div class="panel"><h3>Confusion matrix</h3><p class="muted small">Rows are the true class, columns the prediction. Strong diagonal cells are correct calls.</p><div id="matrix" class="matrix"></div></div>
+    </div>
+    <div id="history" class="split" style="margin-top:2rem" hidden>
+      <div class="panel"><h3>Training and validation loss</h3><div id="chart-loss" class="chart"></div></div>
+      <div class="panel"><h3>Training and validation accuracy</h3><div id="chart-acc" class="chart"></div></div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head">
+      <h2>Where this model slips</h2>
+      <p class="lede">Overall accuracy hides which mistakes are made. Reading the matrix:</p>
+    </div>
+    <div class="prose">
+      <ul>
+        <li><strong>Pituitary macroadenoma is the easy class.</strong> It sits in a distinctive place at the skull base, so the model finds almost all of them.</li>
+        <li><strong>Meningioma is the hardest.</strong> It has the lowest precision and recall, and is mixed up with glioma and healthy slices.</li>
+        <li><strong>Healthy slices are often called meningioma.</strong> That kind of false alarm is the safer direction for a screening aid, but it would still send people for needless follow-up.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head">
+      <h2>The newer model, and the 100% that was not real</h2>
+      <p class="lede">While training a second model we noticed validation accuracy of 100%. We then tested on the held-out images.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Model</th><th class="num">Validation accuracy during training</th><th class="num">Accuracy on held-out test set</th></tr></thead>
+        <tbody>
+          <tr><td>VGG16 (live demo)</td><td class="num">not reported</td><td class="num">80.4%</td></tr>
+          <tr><td>MobileNetV2 (newer)</td><td class="num">100%</td><td class="num"><strong>86.9%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p>The gap is a warning sign. Each scan produces many neighbouring slices that look almost identical. When slices are split into training and validation at random, near-copies of the same slice land on both sides, and the model is scored on images it has effectively already seen. The dataset files contain no patient identifiers, so a split by patient is not possible with the data we have.</p>
+      <p>Per-class recall for the newer model on the test set: pituitary 98%, glioma 93%, healthy 81%, meningioma 75%. Averaging predictions over a flipped copy of each image did not help (86.0%).</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head"><h2>What we plan to do next</h2></div>
+    <ol class="steps">
+      <li><h3>Validate on a clean split</h3><p>Hold back part of the test data or use cross-validation, so checkpoints are chosen by a score that cannot be inflated by near-duplicates.</p></li>
+      <li><h3>Try a stronger backbone</h3><p>EfficientNet or ConvNeXt, with more layers fine-tuned, aimed at meningioma recall.</p></li>
+      <li><h3>Weight the hard class</h3><p>Class weights or focal loss so mistakes on meningioma cost more during training.</p></li>
+      <li><h3>Ensemble</h3><p>Average several models trained on different folds, and connect the best one to the live demo.</p></li>
+    </ol>
+    <div class="callout warn">
+      <h3>What these numbers mean for you</h3>
+      <p>Even at its best this is a research prototype tested on one public dataset. It has not been validated on scans from other hospitals or scanners, which is the test that matters for real-world use.</p>
+    </div>
+  </div>
+</div>

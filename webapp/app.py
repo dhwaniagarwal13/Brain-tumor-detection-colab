@@ -11,8 +11,8 @@ from PIL import Image, UnidentifiedImageError
 import tensorflow as tf
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "..", "Brain_Tumor_Prediction.h5")
-IMAGE_SIZE = 128
+MODEL_PATH = os.path.join(BASE_DIR, "..", "Training", "models", "best.keras")
+IMAGE_SIZE = 224
 # Same order as sorted(os.listdir(train_dir)) in the notebook
 CLASS_NAMES = ["Glioma", "Healthy", "Meningioma", "Pituitary Macroadenoma"]
 MAX_UPLOAD_BYTES = 8 * 1024 * 1024
@@ -25,7 +25,7 @@ model = tf.keras.models.load_model(MODEL_PATH, compile=False)
 
 def preprocess(raw_bytes):
     img = Image.open(io.BytesIO(raw_bytes)).convert("RGB").resize((IMAGE_SIZE, IMAGE_SIZE))
-    return np.expand_dims(np.asarray(img, dtype="float32") / 255.0, axis=0)
+    return np.expand_dims(np.asarray(img, dtype="float32"), axis=0)
 
 
 @app.route("/")

@@ -1,0 +1,66 @@
+<div class="wrap">
+  <div class="page-head">
+    <h1>The data behind the model</h1>
+    <p class="lede">1,137 labelled brain MRI slices in four classes. What is in them, how we split them, and what they cannot tell us.</p>
+  </div>
+
+  <div class="band-tight">
+    <div class="sec-head"><h2>Where the images come from</h2></div>
+    <div class="prose">
+      <p>The images come from the Multi-Class Brain Tumor MRI Dataset published on Mendeley Data by Jamil and Khan (2025), under a CC BY 4.0 licence (doi:10.17632/82mtzd8x72.2). Each file is a single 2D axial slice, resized to 224 x 224 pixels, labelled with one of four classes.</p>
+    </div>
+
+    <h2 style="margin-top:2.5rem">How many images per class</h2>
+    <div class="dist" aria-label="Images per class">
+      <div class="dist-row"><span>Glioma</span><div class="bar-track"><span style="width:100%"></span></div><span>236 train, 59 test</span></div>
+      <div class="dist-row"><span>Healthy</span><div class="bar-track"><span style="width:98.3%"></span></div><span>232 train, 59 test</span></div>
+      <div class="dist-row"><span>Meningioma</span><div class="bar-track"><span style="width:93.6%"></span></div><span>221 train, 56 test</span></div>
+      <div class="dist-row"><span>Pituitary macroadenoma</span><div class="bar-track"><span style="width:92.8%"></span></div><span>219 train, 55 test</span></div>
+    </div>
+    <p class="muted prose">The classes are close to balanced, so plain accuracy is a fair headline number. That would not hold for real screening, where healthy scans vastly outnumber tumors.</p>
+  </div>
+
+  <div class="band">
+    <div class="sec-head"><h2>Splits</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Set</th><th class="num">Images</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr><td>Training</td><td class="num">908</td><td>Fitting the model. About 15% of this is held aside as validation while training.</td></tr>
+          <tr><td>Testing</td><td class="num">229</td><td>Final measurement only. The model never trains on these.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p>The 80/20 split is stratified, so each class appears in the same proportion in both sets. We checked the folders for exact duplicates between training and testing and found none, and only one near-duplicate pair.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head"><h2>Preparation and augmentation</h2></div>
+    <div class="prose">
+      <ul>
+        <li><strong>Resizing and scaling.</strong> Images are resized to the model's input size and pixel values are scaled before they reach the network.</li>
+        <li><strong>Augmentation.</strong> During training only, each image is randomly flipped left to right, rotated by up to about 15 degrees, and varied in brightness and contrast. This teaches the model that a tumor does not change class because the scan is slightly tilted or darker.</li>
+        <li><strong>No augmentation at test time.</strong> The test images are fed in untouched so the score reflects real performance.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head"><h2>Limits of this data</h2></div>
+    <div class="prose">
+      <ul>
+        <li><strong>No patient information.</strong> Files are numbered images, so we cannot tell which slices came from the same person. That makes the split-by-patient evaluation we want impossible, and probably inflates validation scores. <a href="results.html">Details</a>.</li>
+        <li><strong>One source.</strong> Scanner type, field strength and hospital protocol all affect how an MRI looks. A model trained on one source often does worse on another.</li>
+        <li><strong>Slices, not scans.</strong> Real diagnosis looks through a whole 3D volume across several sequences.</li>
+        <li><strong>Healthy images may differ in style.</strong> If the healthy slices were collected differently from the tumor slices, a model could pick up on that difference instead of on anatomy.</li>
+        <li><strong>Four labels only.</strong> Other tumor types, strokes, infections and post-surgical changes are absent.</li>
+      </ul>
+    </div>
+    <div class="callout">
+      <h3>Cite the dataset</h3>
+      <p>Jamil and Khan (2025). Multi-Class Brain Tumor MRI Dataset. Mendeley Data, doi:10.17632/82mtzd8x72.2. Licensed CC BY 4.0.</p>
+    </div>
+  </div>
+</div>

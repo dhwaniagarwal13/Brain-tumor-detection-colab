@@ -1,0 +1,75 @@
+<div class="wrap">
+  <div class="page-head">
+    <h1>How the classifier works</h1>
+    <p class="lede">A convolutional neural network turns an image into four probabilities. Here is each step, and what could go wrong at it.</p>
+  </div>
+
+  <div class="band-tight">
+    <ol class="steps">
+      <li><h3>Prepare the image</h3><p>The slice is converted to three channels, resized (224 x 224 for the current model, 128 x 128 for the earlier VGG16 baseline) and scaled so pixel values sit in a small range. Training uses exactly the same steps as prediction, otherwise results drift.</p></li>
+      <li><h3>Find features with convolutions</h3><p>Small filters slide across the image and respond to edges, textures and shapes. Early layers find simple patterns, and deeper layers combine them into things like blobs, borders and bright rings.</p></li>
+      <li><h3>Shrink and summarise</h3><p>Pooling layers keep the strongest responses and discard detail, so the network cares about what is present more than exactly where.</p></li>
+      <li><h3>Decide with a small head</h3><p>A short stack of dense layers turns the features into four raw scores, one per class. Dropout randomly switches off units during training so the model cannot lean on any single one.</p></li>
+      <li><h3>Turn scores into probabilities</h3><p>A function called softmax converts the four scores into numbers that are positive and add up to 100%. The largest becomes the predicted class.</p></li>
+    </ol>
+  </div>
+
+  <div class="band">
+    <div class="sec-head">
+      <h2>Play with softmax</h2>
+      <p class="lede">Move the raw scores and the temperature to see how probabilities and confidence respond.</p>
+    </div>
+    <div class="lab" id="softmax-lab">
+      <h3>Raw scores in, probabilities out</h3>
+      <p>Higher scores win. The temperature softens or sharpens the result without changing which class is ranked first.</p>
+      <div class="lab-row"><span>Glioma</span><input type="range" min="-4" max="6" step="0.1" data-i="0" aria-label="Glioma score"><output data-val></output></div>
+      <div class="lab-row"><span>Healthy</span><input type="range" min="-4" max="6" step="0.1" data-i="1" aria-label="Healthy score"><output data-val></output></div>
+      <div class="lab-row"><span>Meningioma</span><input type="range" min="-4" max="6" step="0.1" data-i="2" aria-label="Meningioma score"><output data-val></output></div>
+      <div class="lab-row"><span>Pituitary macroadenoma</span><input type="range" min="-4" max="6" step="0.1" data-i="3" aria-label="Pituitary score"><output data-val></output></div>
+      <div class="lab-row"><span>Temperature</span><input type="range" id="temp" min="0.5" max="3" step="0.1" value="1" aria-label="Temperature"><output id="temp-val"></output></div>
+      <div class="lab-out">
+        <div class="lab-row"><span>Glioma</span><div class="bar" data-out><span></span></div><output></output></div>
+        <div class="lab-row"><span>Healthy</span><div class="bar" data-out><span></span></div><output></output></div>
+        <div class="lab-row"><span>Meningioma</span><div class="bar" data-out><span></span></div><output></output></div>
+        <div class="lab-row"><span>Pituitary macroadenoma</span><div class="bar" data-out><span></span></div><output></output></div>
+        <p id="lab-verdict" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head">
+      <h2>Transfer learning: borrowing eyes</h2>
+      <p class="lede">With about 900 training images, a network learning from scratch would memorise them. Instead both models start from a network already trained on millions of everyday photos.</p>
+    </div>
+    <div class="prose">
+      <p>Edges, textures and shapes are useful in any image, brain scans included. We keep those learned filters, add a new small head for the four tumor classes, and then train gently. Fine-tuning goes one step further and lets the top few layers of the borrowed network adjust to MRI as well.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head"><h2>The two models</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Live demo model</th><th>Newer model</th></tr></thead>
+        <tbody>
+          <tr><td>Backbone</td><td>VGG16, ImageNet weights</td><td>MobileNetV2, ImageNet weights</td></tr>
+          <tr><td>Input size</td><td>128 x 128</td><td>224 x 224</td></tr>
+          <tr><td>Training</td><td>Last 3 base layers fine-tuned</td><td>Head first, then top layers fine-tuned</td></tr>
+          <tr><td>Head</td><td>Flatten, dropout, 128 units, dropout, softmax</td><td>Average pooling, dropout 0.35, softmax</td></tr>
+          <tr><td>Extras</td><td>Early stopping</td><td>Label smoothing 0.1, built-in augmentation</td></tr>
+          <tr><td class="num">Test accuracy</td><td><strong>80.4%</strong></td><td><strong>86.9%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted prose">Both numbers come from the 229 held-out test images. The newer model is not yet connected to the live demo. See <a href="results.html">results</a>.</p>
+  </div>
+
+  <div class="band">
+    <div class="sec-head"><h2>Confidence is not correctness</h2></div>
+    <div class="prose">
+      <p>A softmax probability says how the model's scores compare with one another, not how often it is right. Networks trained to minimise error are often over-confident, so a "92%" can be wrong far more than 8% of the time. Smoothing the labels during training, as the newer model does, helps keep scores honest. Even so, this site shows confidence as a hint about uncertainty and never as a guarantee.</p>
+      <div class="callout warn"><p>The model has seen only four categories. Show it a scan with a different problem, such as a stroke, or a different body part, and it will still pick one of the four. It has no "none of the above" option.</p></div>
+    </div>
+  </div>
+</div>

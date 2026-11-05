@@ -3,3 +3,7 @@ webapp/server.log
 webapp/server.err
 __pycache__/
 *.h5
+Training/.venv-tfjs/
+Training/models/phase1.keras
+Training/train.err
+Training/train.log

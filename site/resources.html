@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About NeuroScan and where to learn more</title>
+<meta name="description" content="About this project, how to run it yourself, how to cite it, and trusted organizations for brain tumor information and support.">
+<meta name="theme-color" content="#0c1315">
+<link rel="icon" href="static/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body class="page-resources">
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="index.html" aria-label="NeuroScan home">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 17c3-1 4-5 7-5s3 4 6 4 4-5 9-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="21" cy="21" r="3" fill="var(--amber)"/></svg>
+      <span>NeuroScan</span>
+    </a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav" aria-label="Main">
+      <a href="tumors.html">Tumor types</a>
+      <a href="mri.html">MRI basics</a>
+      <a href="technology.html">How the AI works</a>
+      <a href="results.html">Results</a>
+      <a href="data.html">Data</a>
+      <a href="faq.html">FAQ</a>
+      <a href="resources.html" aria-current="page">Resources</a>
+      <a class="try" href="demo.html">Try the classifier</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap">
+  <div class="page-head">
+    <h1>About the project and where to learn more</h1>
+    <p class="lede">Who built this and why, how to run it yourself, and trusted organizations for people affected by brain tumors.</p>
+  </div>
+
+  <div class="band-tight">
+    <div class="split">
+      <div class="prose">
+        <h2>About NeuroScan</h2>
+        <p>NeuroScan began as a student project to see how well transfer learning can sort brain MRI slices into four categories. It grew into a full write-up because the interesting part was not the accuracy number but understanding what the number means.</p>
+        <p>It is open about its limits on purpose. A medical AI that hides its errors is worse than none, so the results page shows every mistake and the evaluation flaw we found along the way.</p>
+        <h3>Built with</h3>
+        <ul>
+          <li>TensorFlow and Keras for training</li>
+          <li>VGG16 and MobileNetV2 as pretrained backbones</li>
+          <li>Flask for the local prediction server</li>
+          <li>Plain HTML, CSS and JavaScript for this site</li>
+        </ul>
+      </div>
+      <div class="prose">
+        <h2>Run it yourself</h2>
+        <p>Open the project folder, then start the local prediction server:</p>
+        <pre><code>webapp\run.bat</code></pre>
+        <p>To recompute the test metrics shown on the results page:</p>
+        <pre><code>python webapp\evaluate.py</code></pre>
+        <p>To rebuild this website from its source pages:</p>
+        <pre><code>python site_src\build.py</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head">
+      <h2>Trusted places for information and support</h2>
+      <p class="lede">Independent organizations that explain brain tumors, treatment and living with them.</p>
+    </div>
+    <ul class="links">
+      <li><a href="https://www.cancer.gov/types/brain" rel="noopener" target="_blank">National Cancer Institute: brain and spinal cord tumors</a><p>Patient and clinician information from the US government cancer agency.</p></li>
+      <li><a href="https://www.abta.org" rel="noopener" target="_blank">American Brain Tumor Association</a><p>Education, support groups and a helpline for patients and families.</p></li>
+      <li><a href="https://braintumor.org" rel="noopener" target="_blank">National Brain Tumor Society</a><p>Patient resources, research news and advocacy.</p></li>
+      <li><a href="https://www.who.int" rel="noopener" target="_blank">World Health Organization</a><p>Publishes the international classification used to grade nervous system tumors.</p></li>
+      <li><a href="https://www.cancer.org" rel="noopener" target="_blank">American Cancer Society</a><p>Plain-language guides to diagnosis, treatment and support.</p></li>
+    </ul>
+    <p class="muted prose">External sites are independent of this project, and their content can change.</p>
+  </div>
+
+  <div class="band">
+    <div class="sec-head"><h2>How to cite</h2></div>
+    <div class="prose">
+      <p>If you use ideas from this project, please cite the dataset it was trained on:</p>
+      <div class="callout"><p>Jamil and Khan (2025). Multi-Class Brain Tumor MRI Dataset. Mendeley Data, doi:10.17632/82mtzd8x72.2. CC BY 4.0.</p></div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="sec-head"><h2>Important</h2></div>
+    <div class="callout warn">
+      <p>NeuroScan is a student research project. It is not a medical device and must not be used to diagnose, treat or rule out any condition. Any MRI finding needs review by a qualified radiologist or physician. If you have symptoms or concerns, contact a doctor.</p>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-about">
+      <p class="foot-brand">NeuroScan</p>
+      <p>A student research project on classifying brain MRI slices. It is not a medical device and cannot diagnose, treat or rule out any condition. Anyone worried about symptoms or a scan should talk to a doctor.</p>
+    </div>
+    <div>
+      <p class="foot-head">Learn</p>
+      <ul>
+        <li><a href="tumors.html">Tumor types</a></li>
+        <li><a href="mri.html">MRI basics</a></li>
+        <li><a href="faq.html">FAQ and glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="foot-head">The project</p>
+      <ul>
+        <li><a href="technology.html">How the AI works</a></li>
+        <li><a href="results.html">Results</a></li>
+        <li><a href="data.html">Data</a></li>
+        <li><a href="resources.html">Resources and about</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="foot-legal">Built with TensorFlow, Keras and Flask. Dataset: Jamil and Khan (2025), Mendeley Data, doi:10.17632/82mtzd8x72.2, CC BY 4.0. Images on this site labelled synthetic are generated in your browser and are not patient scans.</p>
+</footer>
+<script src="static/common.js"></script>
+</body>
+</html>

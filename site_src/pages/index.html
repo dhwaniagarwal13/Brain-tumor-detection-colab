@@ -1,0 +1,82 @@
+<section class="stage">
+  <div class="stage-in">
+    <div>
+      <h1>Teach a network to sort brain MRI, then see where it goes wrong.</h1>
+      <p class="lede">NeuroScan is a student project that classifies a brain MRI slice as glioma, meningioma, pituitary macroadenoma or healthy. This site explains the tumors, the scans and the AI, and reports the results honestly, including the mistakes.</p>
+      <div class="btn-row">
+        <a class="btn" href="demo.html">Try the classifier</a>
+        <a class="btn btn-line" href="tumors.html">Learn about tumor types</a>
+      </div>
+    </div>
+    <div class="viewer">
+      <div class="viewer-screen">
+        <canvas id="slice" data-mode="flair" aria-label="Synthetic brain MRI slice with a lesion, generated in your browser"></canvas>
+        <div class="ov tl">SYNTHETIC<br>AXIAL<br><span id="ov-seq">T2 FLAIR</span></div>
+        <div class="ov tr"><span id="ov-slice">Slice 15 / 28</span></div>
+        <div class="ov bl">Illustration, not a patient scan</div>
+      </div>
+      <div class="viewer-ctl">
+        <label for="slice-range"><span>Scrub through the slices</span></label>
+        <input id="slice-range" type="range" min="0" max="27" value="14">
+        <p class="viewer-note" id="viewer-note" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Start where your questions are</h2>
+      <p class="lede">Six short guides, written for people who are not radiologists or machine learning engineers.</p>
+    </div>
+    <div class="rows">
+      <a class="row" href="tumors.html"><h3>Tumor types</h3><p>Glioma, meningioma and pituitary macroadenoma: where they start, how they look, how they are treated.</p><span class="go">Read the guide</span></a>
+      <a class="row" href="mri.html"><h3>MRI basics</h3><p>What T1, T2 and FLAIR mean, and why the same brain looks different in each. Includes a sequence switcher.</p><span class="go">Explore MRI</span></a>
+      <a class="row" href="technology.html"><h3>How the AI works</h3><p>Convolutions, transfer learning and what a confidence score does and does not tell you.</p><span class="go">See the model</span></a>
+      <a class="row" href="results.html"><h3>Results</h3><p>Measured accuracy on images the model never saw, the confusion matrix, and a mistake we caught in our own validation.</p><span class="go">Check the numbers</span></a>
+      <a class="row" href="data.html"><h3>Data</h3><p>Where the 1,137 images come from, how they were split, and what the dataset cannot tell us.</p><span class="go">Inspect the data</span></a>
+      <a class="row" href="faq.html"><h3>FAQ and glossary</h3><p>Can AI diagnose a tumor? Is my scan uploaded anywhere? Plain answers and a glossary of imaging terms.</p><span class="go">Get answers</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Four categories, one image at a time</h2>
+      <p class="lede">The classifier looks at a single 2D slice and returns a probability for each category.</p>
+    </div>
+    <div class="cats">
+      <div class="cat"><h3>Glioma</h3><span class="tag">arises from glial cells</span><p>Infiltrative tumors of the brain's supporting tissue, from slow-growing to highly aggressive.</p></div>
+      <div class="cat"><h3>Meningioma</h3><span class="tag">arises from the meninges</span><p>Usually slow-growing tumors attached to the membranes around the brain.</p></div>
+      <div class="cat"><h3>Pituitary macroadenoma</h3><span class="tag">arises from the pituitary gland</span><p>Tumors larger than 10 mm at the base of the brain, often pressing on nearby structures.</p></div>
+      <div class="cat"><h3>Healthy</h3><span class="tag">no visible tumor</span><p>Normal slices, included so the model also learns what a normal brain looks like.</p></div>
+    </div>
+    <p class="muted" style="margin-top:1.2rem"><a href="tumors.html">Read the full tumor guide</a></p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>How well does it work?</h2>
+      <p class="lede">Measured on 229 images held out from training, for the model currently served by the demo.</p>
+    </div>
+    <div id="kpis" class="kpis"></div>
+    <p id="analytics-error" class="error" hidden>The live numbers could not be loaded. The results page has the full write-up.</p>
+    <div class="callout warn">
+      <h3>The number we first saw was wrong</h3>
+      <p>During training, validation accuracy read 100%. On truly held-out images the better model scores 86.9%, and the original one 80.4%. Neighbouring slices from the same scan likely sat on both sides of the split. <a href="results.html">Read what happened and how to fix it</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band band-tight">
+  <div class="wrap">
+    <div class="callout">
+      <h3>Research project, not medical advice</h3>
+      <p>NeuroScan cannot diagnose, treat or rule out any condition. A brain MRI needs review by a qualified radiologist or physician. If you are worried about symptoms, see a doctor.</p>
+    </div>
+  </div>
+</section>

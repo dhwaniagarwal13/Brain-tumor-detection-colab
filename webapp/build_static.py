@@ -1,16 +1,9 @@
-"""Export the Flask page as a static site (site/) for hosts that cannot run TensorFlow, e.g. Vercel."""
-import re
-import shutil
-from pathlib import Path
+"""Retired. The hosted site (site/) is now a multi-page site built from site_src/.
 
-BASE = Path(__file__).resolve().parent
-OUT = BASE.parent / "site"
+This script used to copy the single-page Flask app into site/, deleting everything there first.
+Use `python site_src/build.py` instead. To refresh only the metrics shown on the site after running
+webapp/evaluate.py, copy webapp/static/metrics.json to site/static/metrics.json.
+"""
+import sys
 
-html = (BASE / "templates" / "index.html").read_text(encoding="utf-8")
-html = re.sub(r"\{\{\s*url_for\('static',\s*filename='([^']+)'\)\s*\}\}", r"static/\1", html)
-
-if OUT.exists():
-    shutil.rmtree(OUT)
-shutil.copytree(BASE / "static", OUT / "static")
-(OUT / "index.html").write_text(html, encoding="utf-8")
-print(f"Wrote {OUT}")
+sys.exit("build_static.py is retired. Run: python site_src/build.py")
